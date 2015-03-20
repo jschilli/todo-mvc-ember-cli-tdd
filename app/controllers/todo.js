@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { foobar } from '../utils/util';
 
 export default Ember.ObjectController.extend({
   actions: {
@@ -25,6 +26,7 @@ export default Ember.ObjectController.extend({
 
   isCompleted: function(key, value){
     var model = this.get('model');
+      foobar('bletch');
 
     if (value === undefined) {
       // property being used as a getter

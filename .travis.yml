@@ -1,13 +1,20 @@
-sudo: false
+---
 language: node_js
+
+sudo: false
+
 cache:
   directories:
-  - bower_components
-  - node_modules
-env:
-  global:
-  - GH_REF=github.com/amercier/todomvc-ember-cli.git
-  - secure: "MxJ1skvAEWjJ8UrnjyY/reD+c22bIJnJ/qkpskhXjMD+6/0IaOR89tkx66zJYzAETL4IsroORZO0LZiG52Uplhc66l9h4UjEsJ3zIxImb9WBLW0uTs4M8SbYaj1w80e3/BQVRPfonq10K9EEAzf0cwtWw3OzVzn895kE9UIhs0Q="
-after_success:
-- test "$TRAVIS_PULL_REQUEST" = "false" && test "$TRAVIS_BRANCH" = "master" && ./build.sh dist /todomvc-ember-cli || echo "Pull request. Skipping build" >&2
-- test "$TRAVIS_PULL_REQUEST" = "false" && test "$TRAVIS_BRANCH" = "master" && ./deploy.sh dist || echo "Pull request. Skipping deployment" >&2
+    - node_modules
+
+before_install:
+  - "npm config set spin false"
+  - "npm install -g npm@^2"
+
+install:
+  - npm install -g bower
+  - npm install
+  - bower install
+
+script:
+  - npm test
