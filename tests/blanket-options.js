@@ -1,9 +1,20 @@
-/* globals blanket */
+/* globals blanket, exports */
+var options = {
+    modulePrefix: "todomvc-ember-cli",
+    filter: "//.*todomvc-ember-cli/.*/",
+    antifilter: "//.*(tests|template).*/",
+    modulePattern: "\/(\\w+)",
+    branchTracking: true,
+    loaderExclusions: [],
+    enableCoverage: true,
+    cliOptions: {
+      outputFile: 'test-output.json',
+      reporters: ['json']
+    }
+  };
 
-blanket.options({
-   modulePrefix: "todomvc-ember-cli",
-   filter: "//.*todomvc-ember-cli/.*/",
-   antifilter: "//.*(tests|template).*/",
-   loaderExclusions: [],
-   enableCoverage: true
-});
+if (typeof exports === 'undefined') {
+  blanket.options(options);
+} else {
+  module.exports = options;
+}
